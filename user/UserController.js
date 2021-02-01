@@ -35,4 +35,12 @@ router.get('/:id', function (req, res) {
         res.status(200).send(user);
     });
 })
+
+//Deletes a user from the database
+router.delete('/:id', function (req, res) {
+    User.findByIdAndRemove(req.params.id, function (err, user) {
+        if (err) return res.status(500).send("There was a problem deleting thr user.");
+        res.status(200).send("User " + user.name + " was deleted.");
+    });
+});
 module.exports = router;
